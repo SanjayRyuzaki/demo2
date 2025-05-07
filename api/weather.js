@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Step 1: Get coordinates using Geo API
+    // STEP 1: Get coordinates
     const geoRes = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(city)}&limit=1&appid=${apiKey}`
     );
@@ -22,23 +22,26 @@ export default async function handler(req, res) {
     console.log('GeoData:', geoData);
 
     if (!geoData.length) {
+      console.log('City not found in geolocation API');
       return res.status(404).json({ error: 'City not found' });
     }
 
     const { lat, lon, name } = geoData[0];
 
-    // Step 2: Fetch weather using One Call API
-    const weatherUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=metric&appid=${apiKey}`;
-    console.log('Fetching weather from:', weatherUrl);
-
-    const weatherRes = await fetch(weatherUrl);
+    // STEP 2: Get weather using One Call 3.0 API
+    const weatherRes = await fetch(
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=metric&appid=${apiKey}`
+    );
+    
     const weatherData = await weatherRes.json();
     console.log('WeatherData:', weatherData);
 
-    if (weatherData.cod && weatherData.cod !== 200) {
-      throw new Error(weatherData.message || 'Weather API error');
+    if (!weatherData || !weatherData.current || !weatherData.daily) {
+      console.log('Weather API response missing expected data structure');
+      return res.status(500).json({ error: 'Invalid weather data received' });
     }
 
+    // Successful response
     res.status(200).json({
       city: name,
       current: {
@@ -54,8 +57,9 @@ export default async function handler(req, res) {
         icon: `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`,
       })),
     });
+
   } catch (error) {
-    console.error('Weather API error:', error.message);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('Caught error:', error);
+    res.status(500).json({ error: 'Internal server error: ' + error.message });
   }
 }
