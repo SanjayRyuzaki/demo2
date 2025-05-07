@@ -27,8 +27,17 @@ function App() {
     }
   };
 
+  const getWeatherClass = (description = '') => {
+    const desc = description.toLowerCase();
+    if (desc.includes('cloud')) return 'bg-cloudy';
+    if (desc.includes('rain')) return 'bg-rainy';
+    if (desc.includes('clear')) return 'bg-sunny';
+    if (desc.includes('snow')) return 'bg-snowy';
+    return 'bg-default';
+  };
+
   return (
-    <div className="App">
+    <div className={`App ${getWeatherClass(weather?.description)}`}>
       <h1>Weather App</h1>
 
       <div className="input-group">
