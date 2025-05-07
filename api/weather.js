@@ -1,11 +1,17 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+
+function calculateDewPoint(tempC, humidity) {
+  const a = 17.27;
+  const b = 237.7;
+  const alpha = ((a * tempC) / (b + tempC)) + Math.log(humidity / 100);
+  return (b * alpha) / (a - alpha);
+}
+
 export default async function handler(req, res) {
   const apiKey = process.env.WEATHER_API_KEY;
-  console.log("Loaded API KEY:", apiKey);
   const city = req.query.city;
 
   if (!apiKey) {
-    console.error('API key is missing');
     return res.status(500).json({ error: 'API key not set' });
   }
 
@@ -15,9 +21,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
-        city
-      )}&units=metric&appid=${apiKey}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&appid=${apiKey}`
     );
     const data = await response.json();
 
@@ -25,8 +29,16 @@ export default async function handler(req, res) {
       return res.status(data.cod).json({ error: data.message });
     }
 
+    const dewPoint = calculateDewPoint(data.main.temp, data.main.humidity);
+
     res.status(200).json({
       temperature: data.main.temp,
+      feels_like: data.main.feels_like,
+      humidity: data.main.humidity,
+      pressure: data.main.pressure,
+      wind_speed: data.wind.speed,
+      clouds: data.clouds.all,
+      dew_point: dewPoint.toFixed(2),
       description: data.weather[0].description,
       icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
       city: data.name
