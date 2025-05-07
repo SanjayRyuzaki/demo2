@@ -27,6 +27,7 @@ function App() {
     }
   };
 
+  // Weather background class based on description
   const getWeatherClass = (description = '') => {
     const desc = description.toLowerCase();
     if (desc.includes('cloud')) return 'bg-cloudy';
