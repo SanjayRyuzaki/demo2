@@ -89,6 +89,36 @@ body {
   font-weight: bold;
 }
 
+.bg-sunny {
+  background: linear-gradient(to right, #fceabb, #f8b500);
+}
+
+.bg-cloudy {
+  background: linear-gradient(to right, #bdc3c7, #2c3e50);
+}
+
+.bg-rainy {
+  background: linear-gradient(to right, #3a6073, #16222a);
+  animation: rainMove 6s linear infinite;
+}
+
+.bg-snowy {
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+}
+
+.bg-default {
+  background: linear-gradient(to right, #667eea, #764ba2);
+}
+
+@keyframes rainMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
