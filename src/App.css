@@ -1,26 +1,30 @@
+/* Reset and body setup */
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
   min-height: 100vh;
+  background: linear-gradient(to right, #667eea, #764ba2);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
 }
 
+/* App container */
 .App {
-  text-align: center;
-  width: 100%;
+  width: 90%;
   max-width: 500px;
-  margin: 40px auto;
-  padding: 20px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: background 0.5s ease;
 }
 
+/* Input + button container */
 .input-group {
   display: flex;
   justify-content: center;
@@ -38,7 +42,7 @@ body {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   width: 60%;
-  min-width: 200px;
+  min-width: 180px;
 }
 
 .input-group button {
@@ -59,36 +63,51 @@ body {
   transform: scale(1.05);
   background: #ff5252;
 }
-.weather-info {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 20px;
-  animation: fadeInUp 0.6s ease-out;
-  color: white;
-}
 
-.weather-info img {
-  width: 80px;
-  height: 80px;
-  margin: 10px 0;
+/* Weather info styling */
+.weather-info {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 16px;
+  animation: fadeIn 0.5s ease-out;
+  color: #fff;
 }
 
 .weather-info h2 {
   margin-bottom: 10px;
   font-size: 28px;
-  font-weight: bold;
 }
 
 .weather-info p {
-  margin: 6px 0;
+  margin: 8px 0;
   font-size: 16px;
 }
 
+.weather-info img {
+  width: 80px;
+  height: 80px;
+}
+
+/* Error styling */
 .error-message {
-  color: #ffb3b3;
+  color: #ffc0c0;
   font-weight: bold;
 }
 
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Weather background themes */
 .bg-sunny {
   background: linear-gradient(to right, #fceabb, #f8b500);
 }
@@ -100,6 +119,7 @@ body {
 .bg-rainy {
   background: linear-gradient(to right, #3a6073, #16222a);
   animation: rainMove 6s linear infinite;
+  background-size: 200% 200%;
 }
 
 .bg-snowy {
@@ -110,22 +130,12 @@ body {
   background: linear-gradient(to right, #667eea, #764ba2);
 }
 
+/* Optional rain animation */
 @keyframes rainMove {
   0% {
     background-position: 0 0;
   }
   100% {
     background-position: 100% 100%;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
