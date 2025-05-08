@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #43cea2, #185a9d); /* Fancy teal to blue gradient */
   color: #fff;
   min-height: 100vh;
   display: flex;
@@ -15,10 +15,11 @@ body {
   max-width: 500px;
   margin: 40px auto;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .input-group {
@@ -33,10 +34,7 @@ body {
   border: none;
   font-size: 16px;
   outline: none;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 10px 0 0 10px;
   width: 60%;
   min-width: 200px;
 }
@@ -48,11 +46,8 @@ body {
   font-weight: bold;
   cursor: pointer;
   color: white;
-  transition: transform 0.2s ease;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  transition: transform 0.2s ease, background 0.3s ease;
+  border-radius: 0 10px 10px 0;
 }
 
 .input-group button:hover {
@@ -66,6 +61,12 @@ body {
   padding: 20px;
   animation: fadeInUp 0.6s ease-out;
   color: white;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.weather-info:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
 }
 
 .weather-info img {
@@ -85,15 +86,17 @@ body {
   font-size: 16px;
 }
 
-.error-message {
-  color: #ffb3b3;
-  font-weight: bold;
-}
 .weather-info p:first-of-type {
   font-size: 20px;
   font-weight: 600;
   color: #000000;
 }
+
+.error-message {
+  color: #ffb3b3;
+  font-weight: bold;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -102,5 +105,24 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .App {
+    margin: 20px;
+    padding: 16px;
+  }
+
+  .input-group input,
+  .input-group button {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .input-group {
+    flex-direction: column;
   }
 }
