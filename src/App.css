@@ -92,7 +92,7 @@ body {
 .weather-info p:first-of-type {
   font-size: 20px;
   font-weight: 600;
-  color: #ffffff;
+  color: #000000;
 }
 @keyframes fadeInUp {
   from {
