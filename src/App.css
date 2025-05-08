@@ -1,12 +1,18 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: #fff;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.3s ease;
+}
+
+body.dark {
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+  color: #eee;
 }
 
 .App {
@@ -14,11 +20,12 @@ body {
   width: 100%;
   max-width: 500px;
   margin: 40px auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .input-group {
@@ -29,7 +36,7 @@ body {
 }
 
 .input-group input {
-  padding: 12px 16px;
+  padding: 14px 18px;
   border: none;
   font-size: 16px;
   outline: none;
@@ -42,34 +49,38 @@ body {
 }
 
 .input-group button {
-  padding: 12px 20px;
-  background: #ff6b6b;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
   border: none;
   font-weight: bold;
   cursor: pointer;
   color: white;
-  transition: transform 0.2s ease;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 10px;
+  margin-top: 10px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .input-group button:hover {
   transform: scale(1.05);
-  background: #ff5252;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ff5252, #ff7b47);
 }
+
 .weather-info {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   padding: 20px;
   animation: fadeInUp 0.6s ease-out;
   color: white;
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.weather-info img {
-  width: 80px;
-  height: 80px;
+.weather-info i {
+  font-size: 48px;
   margin: 10px 0;
 }
 
@@ -87,6 +98,15 @@ body {
 .error-message {
   color: #ffb3b3;
   font-weight: bold;
+}
+
+.theme-toggle {
+  margin-bottom: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: inherit;
 }
 
 @keyframes fadeInUp {
