@@ -38,18 +38,17 @@ function App() {
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
-        <button onClick={getWeather} disabled={loading}>
-          {loading ? 'Loading...' : 'Get Weather'}
-        </button>
+        <button onClick={getWeather}>Get Weather</button>
       </div>
 
-      {error && <p className="error-message">{error}</p>}
+      {loading && <p>Loading...</p>}
+      {error && <p className="error">{error}</p>}
 
       {weather && (
-        <div className="weather-info">
-          <h2>{weather.city}</h2>
-          <img src={weather.icon} alt={weather.description} />
-          <p><strong>Temperature:</strong> {weather.temperature} °C</p>
+        <div className="weather-container glass-card">
+          <h2>{weather.name}</h2>
+          <img src={weather.icon} alt="weather icon" />
+          <p><strong>Temperature:</strong> {weather.temp} °C</p>
           <p><strong>Feels Like:</strong> {weather.feels_like} °C</p>
           <p><strong>Humidity:</strong> {weather.humidity} %</p>
           <p><strong>Pressure:</strong> {weather.pressure} hPa</p>
