@@ -89,7 +89,11 @@ body {
   color: #ffb3b3;
   font-weight: bold;
 }
-
+.weather-info p.temperature {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
 @keyframes fadeInUp {
   from {
     opacity: 0;
