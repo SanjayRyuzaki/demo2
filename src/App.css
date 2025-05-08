@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, #43cea2, #185a9d); /* Fancy teal to blue gradient */
   color: #fff;
   min-height: 100vh;
