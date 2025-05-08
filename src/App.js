@@ -27,8 +27,21 @@ function App() {
     }
   };
 
+  const toggleTheme = () => {
+    document.body.classList.toggle('dark');
+  };
+
+  const getWeatherIconClass = (weatherId) => {
+    // You might need to adjust this based on your API's weatherId
+    return `wi wi-owm-${weatherId}`;
+  };
+
   return (
     <div className="App">
+      <button className="theme-toggle" onClick={toggleTheme} title="Toggle Dark Mode">
+        🌙 / ☀️
+      </button>
+
       <h1>Weather App</h1>
 
       <div className="input-group">
@@ -48,7 +61,7 @@ function App() {
       {weather && (
         <div className="weather-info">
           <h2>{weather.city}</h2>
-          <img src={weather.icon} alt={weather.description} />
+          <i className={getWeatherIconClass(weather.weather_id)}></i>
           <p><strong>Temperature:</strong> {weather.temperature} °C</p>
           <p><strong>Feels Like:</strong> {weather.feels_like} °C</p>
           <p><strong>Humidity:</strong> {weather.humidity} %</p>
